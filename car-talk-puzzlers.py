@@ -1,3 +1,5 @@
+import math
+
 def is_palindrome(word):
     return word == word[::-1]
 
@@ -37,10 +39,14 @@ def find_cooincidental_palindromes():
                 print six_digit_number_as_int-3, six_digit_number_as_int-2, six_digit_number_as_int-1, six_digit_number_as_int
 
 def _generate_palindrome_of_x_digits(number_of_digits):
-    half_the_digits = number_of_digits / 2
+    half_the_digits = int(math.ceil(number_of_digits / 2.0))
+    if number_of_digits % 2 == 0:
+        first_half_of_number_slice = slice(0, half_the_digits)
+    else:
+        first_half_of_number_slice = slice(0, half_the_digits - 1)
     for num in xrange(10 ** half_the_digits):
-        first_three_numbers = '{0:0>{1}}'.format(num, half_the_digits)
-        yield '{0}{1}'.format(first_three_numbers, first_three_numbers[::-1])
+        first_half_of_number = '{0:0>{1}}'.format(num, half_the_digits)
+        yield '{0}{1}'.format(first_half_of_number, first_half_of_number[first_half_of_number_slice][::-1])
 
 
 if __name__ == '__main__':
