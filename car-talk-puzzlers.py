@@ -5,7 +5,8 @@ def is_palindrome(word):
 
 def find_cooincidental_palindromes():
     """
-        From http://www.cartalk.com/content/puzzlers:
+        From http://www.cartalk.com/content/puzzlers via
+        http://greenteapress.com/thinkpython/html/thinkpython010.html:
         I was driving on the highway the other day and I happened to notice my
         odometer. Like most odometers, it shows six digits, in whole miles
         only. So, if my car had 300,000 miles, for example, I'd see
