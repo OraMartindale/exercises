@@ -1,3 +1,4 @@
+from collections import defaultdict
 import math
 
 def is_palindrome(word):
@@ -48,6 +49,41 @@ def _generate_palindrome_of_x_digits(number_of_digits):
         first_half_of_number = '{0:0>{1}}'.format(num, half_the_digits)
         yield '{0}{1}'.format(first_half_of_number, first_half_of_number[first_half_of_number_slice][::-1])
 
+def find_how_old_i_am():
+    """From http://www.cartalk.com/content/puzzlers via
+    http://greenteapress.com/thinkpython/html/thinkpython010.html:
+    Recently I had a visit with my mom and we realized that the two digits
+    that make up my age when reversed resulted in her age. For example, if she's
+    73, I'm 37. We wondered how often this has happened over the years but we
+    got sidetracked with other topics and we never came up with an answer.
+
+    When I got home I figured out that the digits of our ages have been
+    reversible six times so far. I also figured out that if we're lucky it would
+    happen again in a few years, and if we're really lucky it would happen one
+    more time after that. In other words, it would have happened 8 times over
+    all. So the question is, how old am I now?
+    """
+
+    age_diff_lookup = defaultdict(list)
+    min_age_diff_we_will_consider = 10
+    i = 1
+    while True:
+        current_number = str(i).zfill(2)
+        age_diff = int(current_number[::-1]) - i
+        if age_diff > min_age_diff_we_will_consider:
+            age_diff_lookup[age_diff].append((current_number, current_number[::-1]))
+            if len(age_diff_lookup[age_diff]) == 8:
+                your_age, your_moms_age = age_diff_lookup[age_diff][5]
+                print 'Your age is {} and your mom is {}'.format(
+                    your_age,
+                    your_moms_age
+                )
+                break
+        i += 1
+        if i > 10000:
+            print 'Stopped the loop before this gets out of hand.'
+            break
+
 
 if __name__ == '__main__':
-    find_cooincidental_palindromes()
+    find_how_old_i_am()
