@@ -1,12 +1,12 @@
 from collections import defaultdict
+from textwrap import dedent
 import math
 
-def is_palindrome(word):
-    return word == word[::-1]
-
 def find_cooincidental_palindromes():
-    """From http://www.cartalk.com/content/puzzlers via
+    """
+    From http://www.cartalk.com/content/puzzlers via
     http://greenteapress.com/thinkpython/html/thinkpython010.html:
+
     I was driving on the highway the other day and I happened to notice my
     odometer. Like most odometers, it shows six digits, in whole miles
     only. So, if my car had 300,000 miles, for example, I'd see
@@ -30,28 +30,32 @@ def find_cooincidental_palindromes():
     str_ = str
     int_ = int
 
+    outerBreak = False
     for six_digit_number in _generate_palindrome_of_x_digits(6):
         six_digit_number_as_int = int_(six_digit_number)
         for four_digit_number in _generate_palindrome_of_x_digits(4):
             if all((six_digit_number_as_int - 3 == int_('{}{}'.format(six_digit_number[:2], four_digit_number)),
-                   is_palindrome(str_(six_digit_number_as_int - 2)[1:]),
-                   is_palindrome(str_(six_digit_number_as_int - 1)[1:-1]),
+                   _is_palindrome(str_(six_digit_number_as_int - 2)[1:]),
+                   _is_palindrome(str_(six_digit_number_as_int - 1)[1:-1]),
                     )):
-                print six_digit_number_as_int-3, six_digit_number_as_int-2, six_digit_number_as_int-1, six_digit_number_as_int
+                outerBreak = True
+                break
+        if outerBreak:
+            break
 
-def _generate_palindrome_of_x_digits(number_of_digits):
-    half_the_digits = int(math.ceil(number_of_digits / 2.0))
-    if number_of_digits % 2 == 0:
-        first_half_of_number_slice = slice(0, half_the_digits)
-    else:
-        first_half_of_number_slice = slice(0, half_the_digits - 1)
-    for num in xrange(10 ** half_the_digits):
-        first_half_of_number = '{0:0>{1}}'.format(num, half_the_digits)
-        yield '{0}{1}'.format(first_half_of_number, first_half_of_number[first_half_of_number_slice][::-1])
+    print dedent(find_cooincidental_palindromes.__doc__)
+    print six_digit_number_as_int - 3
+    print 'Your odometer then read {}, {} and {}.'.format(
+        six_digit_number_as_int - 2,
+        six_digit_number_as_int - 1,
+        six_digit_number_as_int
+    )
 
 def find_how_old_i_am():
-    """From http://www.cartalk.com/content/puzzlers via
+    """
+    From http://www.cartalk.com/content/puzzlers via
     http://greenteapress.com/thinkpython/html/thinkpython010.html:
+
     Recently I had a visit with my mom and we realized that the two digits
     that make up my age when reversed resulted in her age. For example, if she's
     73, I'm 37. We wondered how often this has happened over the years but we
@@ -74,6 +78,7 @@ def find_how_old_i_am():
             age_diff_lookup[age_diff].append((current_number, current_number[::-1]))
             if len(age_diff_lookup[age_diff]) == 8:
                 your_age, your_moms_age = age_diff_lookup[age_diff][5]
+                print dedent(find_how_old_i_am.__doc__)
                 print 'Your age is {} and your mom is {}'.format(
                     your_age,
                     your_moms_age
@@ -84,6 +89,18 @@ def find_how_old_i_am():
             print 'Stopped the loop before this gets out of hand.'
             break
 
+def _is_palindrome(word):
+    return word == word[::-1]
+
+def _generate_palindrome_of_x_digits(number_of_digits):
+    half_the_digits = int(math.ceil(number_of_digits / 2.0))
+    if number_of_digits % 2 == 0:
+        first_half_of_number_slice = slice(0, half_the_digits)
+    else:
+        first_half_of_number_slice = slice(0, half_the_digits - 1)
+    for num in xrange(10 ** half_the_digits):
+        first_half_of_number = '{0:0>{1}}'.format(num, half_the_digits)
+        yield '{0}{1}'.format(first_half_of_number, first_half_of_number[first_half_of_number_slice][::-1])
 
 if __name__ == '__main__':
     find_how_old_i_am()
