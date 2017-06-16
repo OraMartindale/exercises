@@ -1,6 +1,48 @@
 from collections import defaultdict
-from textwrap import dedent
 import math
+import os
+from textwrap import dedent
+import urllib
+
+WORDS_FILE_NAME = 'words.txt'
+
+def find_consecutive_letter_pairs():
+    """
+    From http://www.cartalk.com/content/puzzlers via
+    http://greenteapress.com/thinkpython/html/thinkpython010.html:
+
+    Give me a word with three consecutive double letters. I'll give you a couple
+    of words that almost qualify, but don't. For example, the word committee,
+    c-o-m-m-i-t-t-e-e. It would be great except for the 'i' that sneaks in
+    there. Or Mississippi: M-i-s-s-i-s-s-i-p-p-i. If you could take out those
+    i's it would work. But there is a word that has three consecutive pairs of
+    letters and to the best of my knowledge this may be the only word. Of course
+    there are probably 500 more but I can only think of one.
+
+    What is the word?
+    """
+
+    print dedent(find_consecutive_letter_pairs.__doc__)
+    for word in _get_word_list():
+        if len(word) >= 6:
+            matches = 0
+            skip_next_letter = False
+            go_to_next_word = False
+            for i, letter in enumerate(word):
+                if skip_next_letter:
+                    skip_next_letter = False
+                    continue
+                if (i+1) < len(word):
+                    if letter == word[i+1]:
+                        matches += 1
+                        skip_next_letter = True
+                    elif matches > 0:
+                        go_to_next_word = True
+                        break
+            if matches == 3:
+                print word
+            elif go_to_next_word:
+                continue
 
 def find_cooincidental_palindromes():
     """
@@ -102,5 +144,18 @@ def _generate_palindrome_of_x_digits(number_of_digits):
         first_half_of_number = '{0:0>{1}}'.format(num, half_the_digits)
         yield '{0}{1}'.format(first_half_of_number, first_half_of_number[first_half_of_number_slice][::-1])
 
+def _get_word_list():
+    if not os.path.isfile(WORDS_FILE_NAME):
+        _get_word_file()
+
+    with open(WORDS_FILE_NAME, 'r') as f:
+        return [line.strip() for line in f]
+
+def _get_word_file():
+    filehandle = urllib.urlopen('http://www.greenteapress.com/thinkpython/code/words.txt')
+    with open(WORDS_FILE_NAME, 'w') as f:
+        for line in filehandle:
+            f.write(line)
+
 if __name__ == '__main__':
-    find_how_old_i_am()
+    find_consecutive_letter_pairs()
