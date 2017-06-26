@@ -12,8 +12,7 @@ Initialized empty Git repository in .../Code/your_repo/.git/
 Refs
 
 ```shell
-~/Code > cd your_repo/.git
-~/Code/your_repo/.git> ls -l
+~/Code/your_repo> ls -l .git/
 total 24
 -rw-r--r--   1 ora  staff   23 Jun 22 22:33 HEAD
 -rw-r--r--   1 ora  staff  137 Jun 22 22:33 config
@@ -22,10 +21,8 @@ drwxr-xr-x  12 ora  staff  408 Jun 22 22:33 hooks
 drwxr-xr-x   3 ora  staff  102 Jun 22 22:33 info
 drwxr-xr-x   4 ora  staff  136 Jun 22 22:33 objects
 drwxr-xr-x   4 ora  staff  136 Jun 22 22:33 refs
-~/Code/your_repo/.git> cat HEAD
+~/Code/your_repo> cat .git/HEAD
 ref: refs/heads/master
-~/Code/your_repo/.git> cd refs/heads/
-~/Code/your_repo/.git/refs/heads> ls -l
 ```
 
 ---
@@ -74,7 +71,7 @@ nothing added to commit but untracked files present (use "git add" to track)
 [master (root-commit) fe1849b] Initial Commit
  1 file changed, 1 insertion(+)
  create mode 100644 a.txt
- ```
+```
  
 ---
 
