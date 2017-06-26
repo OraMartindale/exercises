@@ -13,7 +13,7 @@ Refs
 
 ```shell
 ~/Code > cd your_repo/.git
-~/Code/your_repo/.git (GIT_DIR!) > ls -l
+~/Code/your_repo/.git> ls -l
 total 24
 -rw-r--r--   1 ora  staff   23 Jun 22 22:33 HEAD
 -rw-r--r--   1 ora  staff  137 Jun 22 22:33 config
@@ -22,10 +22,10 @@ drwxr-xr-x  12 ora  staff  408 Jun 22 22:33 hooks
 drwxr-xr-x   3 ora  staff  102 Jun 22 22:33 info
 drwxr-xr-x   4 ora  staff  136 Jun 22 22:33 objects
 drwxr-xr-x   4 ora  staff  136 Jun 22 22:33 refs
-~/Code/your_repo/.git (GIT_DIR!) > cat HEAD
+~/Code/your_repo/.git> cat HEAD
 ref: refs/heads/master
-~/Code/your_repo/.git (GIT_DIR!) > cd refs/heads/
-~/Code/your_repo/.git/refs/heads (GIT_DIR!) > ls -l
+~/Code/your_repo/.git> cd refs/heads/
+~/Code/your_repo/.git/refs/heads> ls -l
 ```
 
 ---
@@ -46,7 +46,7 @@ drwxr-xr-x  2 ora  staff   68 Jun 25 18:23 tags
 Objects
 
 ```shell
-~/Code/your_repo/.git/objects (GIT_DIR!) > ls -l
+~/Code/your_repo/.git/objects> ls -l
 total 0
 drwxr-xr-x  2 ora  staff   68 Jun 22 22:49 info
 drwxr-xr-x  2 ora  staff   68 Jun 22 22:49 pack
@@ -70,7 +70,7 @@ Untracked files:
 
 nothing added to commit but untracked files present (use "git add" to track)
 ~/Code/your_repo (master) > git add a.txt
-ora@Thes-iMac:~/Code/your_repo (master) > git commit -m 'Initial Commit'
+~/Code/your_repo (master) > git commit -m 'Initial Commit'
 [master (root-commit) fe1849b] Initial Commit
  1 file changed, 1 insertion(+)
  create mode 100644 a.txt
@@ -81,7 +81,7 @@ ora@Thes-iMac:~/Code/your_repo (master) > git commit -m 'Initial Commit'
 Commit Hash
 
 ```shell
-ora@Thes-iMac:~/Code/your_repo (master) > git commit -m 'Initial Commit'
+~/Code/your_repo (master) > git commit -m 'Initial Commit'
 [master (root-commit) fe1849b] Initial Commit
  1 file changed, 1 insertion(+)
  create mode 100644 a.txt
@@ -89,15 +89,15 @@ ora@Thes-iMac:~/Code/your_repo (master) > git commit -m 'Initial Commit'
 @[2](The short hash number fe1849b)
 
 ```shell
-~/Code/your_repo/.git (GIT_DIR!) > cat HEAD
+~/Code/your_repo> cat .git/HEAD
 ref: refs/heads/master
 ```
 
 ```shell
-~/Code/your_repo/.git (GIT_DIR!) > ls -l refs/heads/
+~/Code/your_repo> ls -l .git/refs/heads/
 total 8
 -rw-r--r--  1 ora  staff  41 Jun 22 22:47 master
-ora@Thes-iMac:~/Code/your_repo/.git (GIT_DIR!) > cat refs/heads/master
+~/Code/your_repo> cat .git/refs/heads/master
 fe1849b4941e07ac5b4f1b079ee40d991ab6a260
 ```
 @[5](This is the full hash)
@@ -107,7 +107,7 @@ fe1849b4941e07ac5b4f1b079ee40d991ab6a260
 Objects
 
 ```shell
-~/Code/your_repo/.git/objects (GIT_DIR!) > ls -l
+~/Code/your_repo> ls -l .git/objects
 total 0
 drwxr-xr-x  3 ora  staff  102 Jun 25 18:27 6e
 drwxr-xr-x  3 ora  staff  102 Jun 25 18:27 99
@@ -116,20 +116,20 @@ drwxr-xr-x  2 ora  staff   68 Jun 22 22:33 info
 drwxr-xr-x  2 ora  staff   68 Jun 22 22:33 pack
 ```
 
-@[5-7]
+@[3-5]
 
 ---
 
 Directories are the first 2 characters of hash
 
 ```shell
-~/Code/your_repo/.git/objects (GIT_DIR!) > ls -l 6e
+~/Code/your_repo> ls -l .git/objects/6e
 total 8
 -r--r--r--  1 ora  staff   22 Jun 22 22:47 1f5175fa2857fc46ca6d4427218d8e570f9e69
-~/Code/your_repo/.git/objects (GIT_DIR!) > ls -l 99
+~/Code/your_repo> ls -l .git/objects/99
 total 8
 -r--r--r--  1 ora  staff   49 Jun 22 22:47 7e03b14109d3602e290b6d370255bb8cab8ff6
-~/Code/your_repo/.git/objects (GIT_DIR!) > ls -l fe
+~/Code/your_repo> ls -l .git/objects/fe
 total 8
 -r--r--r--  1 ora  staff  131 Jun 25 18:27 1849b4941e07ac5b4f1b079ee40d991ab6a260
 ```
@@ -140,11 +140,11 @@ implication: that can be a max of 256 directories
 
 
 ```shell
-~/Code/your_repo/.git/objects (GIT_DIR!) > git cat-file -p 997e03b14109d3602e290b6d370255bb8cab8ff6
+~/Code/your_repo> git cat-file -p 997e03b14109d3602e290b6d370255bb8cab8ff6
 100644 blob 6e1f5175fa2857fc46ca6d4427218d8e570f9e69	a.txt
-~/Code/your_repo/.git/objects (GIT_DIR!) > git cat-file -p 6e1f5175fa2857fc46ca6d4427218d8e570f9e69
+~/Code/your_repo> git cat-file -p 6e1f5175fa2857fc46ca6d4427218d8e570f9e69
 Test A
-~/Code/your_repo/.git (GIT_DIR!) > git cat-file -p fe1849b4941e07ac5b4f1b079ee40d991ab6a260
+~/Code/your_repo> git cat-file -p fe1849b4941e07ac5b4f1b079ee40d991ab6a260
 tree 997e03b14109d3602e290b6d370255bb8cab8ff6
 author Ora Martindale <ora@martindale.org> 1498433262 -0500
 committer Ora Martindale <ora@martindale.org> 1498433262 -0500
@@ -156,20 +156,20 @@ Initial Commit
 
 <!--- Let's add a remote --->
 ```shell
-~/Code/your_repo/.git/refs/remotes/origin (GIT_DIR!) > git remote add add origin https://github.com/OraMartindale/your_repo.git
+~/Code/your_repo> git remote add add origin https://github.com/OraMartindale/your_repo.git
 ```
 
 <!--- And see what happened to the remotes directory --->
 Nothing refs for that remote yet:
 ```shell
-~/Code/your_repo/.git (GIT_DIR!) > ls -l refs/
+~/Code/your_repo> ls -l .git/refs/
 total 0
 drwxr-xr-x  3 ora  staff  102 Jun 25 18:27 heads
 drwxr-xr-x  2 ora  staff   68 Jun 25 18:23 tags
 ```
 
 ```shell
-~/Code/your_repo/.git (GIT_DIR!) > git push --set-upstream origin master
+~/Code/your_repo> git push --set-upstream origin master
 Counting objects: 3, done.
 Writing objects: 100% (3/3), 217 bytes | 0 bytes/s, done.
 Total 3 (delta 0), reused 0 (delta 0)
@@ -180,7 +180,7 @@ Branch master set up to track remote branch master from origin.
 
 Now it's there:
 ```shell
-~/Code/your_repo/.git (GIT_DIR!) > ls -l refs/
+~/Code/your_repo> ls -l .git/refs/
 total 0
 drwxr-xr-x  3 ora  staff  102 Jun 25 18:27 heads
 drwxr-xr-x  3 ora  staff  102 Jun 25 18:42 remotes
@@ -188,7 +188,7 @@ drwxr-xr-x  2 ora  staff   68 Jun 25 18:23 tags
 ```
 
 ```shell
-~/Code/your_repo/.git (GIT_DIR!) > ls -l refs/remotes/
+~/Code/your_repo> ls -l .git/refs/remotes/
 total 0
 drwxr-xr-x  3 ora  staff  102 Jun 25 17:14 .
 drwxr-xr-x  5 ora  staff  170 Jun 25 17:14 ..
@@ -196,7 +196,7 @@ drwxr-xr-x  3 ora  staff  102 Jun 25 17:18 origin
 ```
 
 ```shell
-~/Code/your_repo/.git (GIT_DIR!) > ls -l refs/remotes/origin
+~/Code/your_repo> ls -l .git/refs/remotes/origin
 total 8
 drwxr-xr-x  3 ora  staff  102 Jun 25 17:18 .
 drwxr-xr-x  3 ora  staff  102 Jun 25 17:14 ..
@@ -204,7 +204,7 @@ drwxr-xr-x  3 ora  staff  102 Jun 25 17:14 ..
 ```
 
 ```shell
-~/Code/your_repo/.git/refs/remotes/origin (GIT_DIR!) > cat master
+~/Code/your_repo> cat .git/refs/remotes/origin/master
 fe1849b4941e07ac5b4f1b079ee40d991ab6a260
 ```
 
@@ -214,7 +214,7 @@ fe1849b4941e07ac5b4f1b079ee40d991ab6a260
 
 <!---  --->
 ```shell
-~/Code/your_repo/.git (GIT_DIR!) > git fetch
+~/Code/your_repo> git fetch
 remote: Counting objects: 4, done.
 remote: Compressing objects: 100% (2/2), done.
 remote: Total 4 (delta 0), reused 0 (delta 0), pack-reused 0
@@ -231,7 +231,7 @@ From https://github.com/OraMartindale/your_repo
 
 <!--- The objects directory has changed... --->
 ```shell
-~/Code/your_repo/.git/objects (GIT_DIR!) > ll
+~/Code/your_repo> ls -l .git/objects
 total 0
 drwxr-xr-x  3 ora  staff  102 Jun 25 18:51 14
 drwxr-xr-x  3 ora  staff  102 Jun 25 18:27 6e
@@ -281,12 +281,12 @@ drwxr-xr-x   3 ora  staff  102 Jun 25 17:25 dir
 
 <!--- The master is now pointing to a different hash --->
 ```shell
-~/Code/your_repo/.git (GIT_DIR!) > cat refs/heads/master
+~/Code/your_repo> cat .git/refs/heads/master
 14ea5eced7cc597863d143daafb5c4d0f5a77c16
 ```
 
 ```shell
-~/Code/your_repo/.git (GIT_DIR!) > git cat-file -p b0fbf3922e664911cdb0b3124c44ec00807b4ba4
+~/Code/your_repo> git cat-file -p b0fbf3922e664911cdb0b3124c44ec00807b4ba4
 tree e88b3470bfea9773150a652fc1a14ddf039e7825
 parent fe1849b4941e07ac5b4f1b079ee40d991ab6a260
 author OraMartindale <OraMartindale@users.noreply.github.com> 1498434677 -0500
