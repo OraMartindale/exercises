@@ -57,29 +57,21 @@ ref: refs/heads/master
 
 ---
 
-First file and first commit
+First commit
 
 ```shell
 ~/Code/your_repo (master) > echo 'Test A' > a.txt
-```
-
-```shell
-~/Code/your_repo (master) > git status
-On branch master
-
-Initial commit
-
-Untracked files:
-  (use "git add <file>..." to include in what will be committed)
-
-	a.txt
 ~/Code/your_repo (master) > git add a.txt
 ~/Code/your_repo (master) > git commit -m 'Initial Commit'
 [master (root-commit) fe1849b] Initial Commit
  1 file changed, 1 insertion(+)
  create mode 100644 a.txt
 ```
- 
+
+@[1]
+@[2]
+@[3-6]
+
 ---
 
 Commit Hash
@@ -91,6 +83,8 @@ Commit Hash
  create mode 100644 a.txt
 ```
 @[2](The short hash number fe1849b)
+
++++
 
 ```shell
 ~/Code/your_repo (master) > ls -l .git/refs/heads/
