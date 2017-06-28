@@ -271,6 +271,8 @@ Has ref's changed? Yes, origin's master has been updated:
 ```shell
 ~/Code/your_repo (master) > cat .git/refs/remotes/origin/master 
 14ea5eced7cc597863d143daafb5c4d0f5a77c16
+~/Code/your_repo (master) > cat .git/refs/heads/master
+fe1849b4941e07ac5b4f1b079ee40d991ab6a260
 ```
 
 +++
@@ -296,8 +298,8 @@ drwxr-xr-x  2 ora  staff   68 Jun 22 22:33 pack
 Has HEAD changed? No.
 
 ```shell
-~/Code/your_repo (master) > cat .git/refs/heads/master
-fe1849b4941e07ac5b4f1b079ee40d991ab6a260
+~/Code/your_repo (master) > cat .git/HEAD
+ref: refs/heads/master
 ```
 
 +++
@@ -332,7 +334,7 @@ Has refs changed? Yes, local master is pointing to most recent commit hash
 14ea5eced7cc597863d143daafb5c4d0f5a77c16
 ```
 
-++++
++++
 
 <!--- and now the directory exists: --->
 ```shell
@@ -485,6 +487,8 @@ Merge branch 'new_branch'
 ```
 
 @[3-4](This commit has 2 parents)
+
++++
 
 ```shell
 ~/Code/your_repo (master) > git log --oneline --graph
