@@ -74,8 +74,6 @@ First commit
 
 ---
 
-Commit Hash
-
 ```shell
 ~/Code/your_repo (master) > git commit -m 'Initial Commit'
 [master (root-commit) fe1849b] Initial Commit
@@ -86,6 +84,7 @@ Commit Hash
 
 +++
 
+What does refs look like now?
 ```shell
 ~/Code/your_repo (master) > ls -l .git/refs/heads/
 total 8
@@ -93,11 +92,14 @@ total 8
 ~/Code/your_repo (master) > cat .git/refs/heads/master
 fe1849b4941e07ac5b4f1b079ee40d991ab6a260
 ```
+
+@[1-3]
+@[4]
 @[5](This is the full hash)
 
----
++++
 
-Object Storage
+What does objects look like now?
 
 ```shell
 ~/Code/your_repo (master) > ls -l .git/objects
@@ -114,7 +116,16 @@ drwxr-xr-x  2 ora  staff   68 Jun 22 22:33 pack
 
 +++
 
-Directories are the first 2 characters of hash
+What does HEAD look like now?
+
+```shell
+~/Code/your_repo (master) > cat .git/HEAD
+ref: refs/heads/master
+```
+
+---
+
+Object Storage
 
 ```shell
 ~/Code/your_repo (master) > ls -l .git/objects/6e
@@ -166,13 +177,17 @@ Initial Commit
 
 ---
 
-<!--- Let's add a remote --->
+Adding a Remote
+
 ```shell
 ~/Code/your_repo (master) > git remote add add origin https://github.com/OraMartindale/your_repo.git
 ```
 
++++
 <!--- And see what happened to the remotes directory --->
-Nothing refs for that remote yet:
+
+What does our refs look like now? No change.
+
 ```shell
 ~/Code/your_repo (master) > ls -l .git/refs/
 total 0
@@ -232,11 +247,12 @@ total 8
 fe1849b4941e07ac5b4f1b079ee40d991ab6a260
 ```
 
-@[2](Same hash)
+@[2](Same commit hash)
 
 ---
 
-<!---  --->
+Fetching remote changes
+
 ```shell
 ~/Code/your_repo (master) > git fetch
 remote: Counting objects: 4, done.
@@ -246,14 +262,21 @@ Unpacking objects: 100% (4/4), done.
 From https://github.com/OraMartindale/your_repo
    fe1849b..14ea5ec  master     -> origin/master
 ```
+@[7](local master's commit hash and the origin master's commit hash)
 
-<!--- The remote's master branch now points to the newest commit --->
++++
+
+Has ref's changed? Yes, origin's master has been updated:
+
 ```shell
 ~/Code/your_repo (master) > cat .git/refs/remotes/origin/master 
 14ea5eced7cc597863d143daafb5c4d0f5a77c16
 ```
 
-<!--- The objects directory has changed... --->
++++
+
+Has object's changed? Yes, we have new objects.
+
 ```shell
 ~/Code/your_repo (master) > ls -l .git/objects
 total 0
@@ -268,22 +291,29 @@ drwxr-xr-x  2 ora  staff   68 Jun 22 22:33 info
 drwxr-xr-x  2 ora  staff   68 Jun 22 22:33 pack
 ```
 
-<!--- But the directory has not changed yet. --->
++++
+
+Has HEAD changed? No.
+
+```shell
+~/Code/your_repo (master) > cat .git/refs/heads/master
+fe1849b4941e07ac5b4f1b079ee40d991ab6a260
+```
+
++++
+
+Also our code directory structure has not changed yet.
+
 ```shell
 ~/Code/your_repo (master) > ls -l
 total 8
 -rw-r--r--   1 ora  staff    7 Jun 22 22:46 a.txt
 ```
 
-<!--- And the master branch's pointer has not changed --->
-```shell
-~/Code/your_repo (master) > cat .git/refs/heads/master
-fe1849b4941e07ac5b4f1b079ee40d991ab6a260
-```
-
 ---
 
-<!--- Now let's merge those changes in. --->
+Merging
+
 ```shell
 ~/Code/your_repo (master) > git merge
 Updating fe1849b..14ea5ec
@@ -292,6 +322,17 @@ Fast-forward
  1 file changed, 1 insertion(+)
  create mode 100644 dir/b.txt
 ```
+
++++
+
+Has refs changed? Yes, local master is pointing to most recent commit hash
+
+```shell
+~/Code/your_repo (master) > cat .git/refs/heads/master
+14ea5eced7cc597863d143daafb5c4d0f5a77c16
+```
+
+++++
 
 <!--- and now the directory exists: --->
 ```shell
@@ -304,13 +345,9 @@ drwxr-xr-x   3 ora  staff  102 Jun 25 17:25 dir
 ---
 
 <!--- The master is now pointing to a different hash --->
-```shell
-~/Code/your_repo (master) > cat .git/refs/heads/master
-14ea5eced7cc597863d143daafb5c4d0f5a77c16
-```
 
 ```shell
-~/Code/your_repo (master) > git cat-file -p b0fbf3922e664911cdb0b3124c44ec00807b4ba4
+~/Code/your_repo (master) > git cat-file -p 14ea5eced7cc597863d143daafb5c4d0f5a77c16
 tree e88b3470bfea9773150a652fc1a14ddf039e7825
 parent fe1849b4941e07ac5b4f1b079ee40d991ab6a260
 author OraMartindale <OraMartindale@users.noreply.github.com> 1498434677 -0500
@@ -336,6 +373,27 @@ Branches
 
 +++
 
+Did refs change?
+
+```shell
+~/Code/your_repo (master) > ls -l .git/refs/heads/
+total 16
+-rw-r--r--  1 ora  staff  41 Jun 25 19:00 master
+-rw-r--r--  1 ora  staff  41 Jun 25 19:13 new_branch
+```
+
++++
+
+```shell
+~/Code/your_repo (master) > cat .git/refs/heads/master 
+14ea5eced7cc597863d143daafb5c4d0f5a77c16
+~/Code/your_repo (master) > cat .git/refs/heads/new_branch 
+14ea5eced7cc597863d143daafb5c4d0f5a77c16
+```
+
++++
+
+Did Ojbects change? No
 ```shell
 ~/Code/your_repo (master) > ls -l .git/objects/
 total 0
@@ -352,20 +410,11 @@ drwxr-xr-x  2 ora  staff   68 Jun 25 18:23 pack
 
 +++
 
-```shell
-~/Code/your_repo (master) > ls -l .git/refs/heads/
-total 16
--rw-r--r--  1 ora  staff  41 Jun 25 19:00 master
--rw-r--r--  1 ora  staff  41 Jun 25 19:13 new_branch
-```
-
-+++
+Did HEAD change? No
 
 ```shell
-~/Code/your_repo (master) > cat .git/refs/heads/master 
-14ea5eced7cc597863d143daafb5c4d0f5a77c16
-~/Code/your_repo (master) > cat .git/refs/heads/new_branch 
-14ea5eced7cc597863d143daafb5c4d0f5a77c16
+~/Code/your_repo (new_branch) > cat .git/HEAD 
+ref: refs/heads/master
 ```
 
 +++
@@ -397,8 +446,8 @@ ref: refs/heads/new_branch
 2f354d1009288442c53f1dc0a0c43def619efade
 ```
 
-@[2](Since we didn't update anything on the master branch, it's pointer hasn't changed)
-@[4](The pointer for the new branch has)
+@[2](Since we didn't update anything on the master branch, it's ref hasn't changed)
+@[4](The ref for the new branch has)
 
 +++
 
@@ -413,10 +462,16 @@ Merge made by the 'recursive' strategy.
  create mode 100644 c.txt
 ```
 
++++
+
+Did refs change?
+
 ```shell
 ~/Code/your_repo (master) > cat .git/refs/heads/master 
 a0113f743cf5ed582ed38242c87f325130a3d4d8
 ```
+
++++
 
 ```shell
 ~/Code/your_repo (master) > git cat-file -p a0113f743cf5ed582ed38242c87f325130a3d4d8
@@ -446,11 +501,11 @@ Merge branch 'new_branch'
 ---
 
 Resources
-[Git](https://www.git-scm.com/)
-[Git Tip of the Week](http://alblue.bandlem.com/2011/12/git-tip-of-week-finale.html)
-[GitHub](https://guides.github.com/)
-[BitBucket](https://confluence.atlassian.com/get-started-with-bitbucket/)
+- Git: https://www.git-scm.com/
+- Git Tip of the Week: http://alblue.bandlem.com/2011/12/git-tip-of-week-finale.html
+- GitHub: https://guides.github.com/
+- BitBucket: https://confluence.atlassian.com/get-started-with-bitbucket/
 
 ---
 
-The End!
+Questions?
