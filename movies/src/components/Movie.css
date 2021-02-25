@@ -1,0 +1,117 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.movie {
+  background-color: white;
+  margin: 20px;
+  width: 350px;
+  box-sizing: 0 6px 6px rgba(0, 0, 0, 0.3);
+}
+
+.movie_header {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.movie_poster {
+  border-radius: 5px;
+  width: 50px;
+  margin: 0 10px 0 0;
+}
+
+.movie_metadata {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.movie_metadata ul {
+  display: flex;
+}
+
+.movie_metadata ul li {
+  color: rgba(0, 0, 0, 0.5);
+  list-style-type: none;
+  margin-right: 1rem;
+}
+
+.movie iframe {
+  width: 100%;
+  height: 200px;
+}
+
+ul.movie_scores {
+  display: flex;
+  justify-content: space-evenly;
+  list-style-type: none;
+  margin: 20px 0;
+}
+
+ul.movie_scores li {
+  color: #1558d6;
+  font-size: 1.1rem;
+}
+
+.imdb_score::before {
+  content: url('https://ssl.gstatic.com/ke-tvm/showtimes/imdb_16_16.png');
+  margin-right: 5px
+}
+
+.rotten_tomato_score::before {
+  content: url('https://ssl.gstatic.com/ke-tvm/showtimes/rottentomatoes_16_16.png');
+  margin-right: 5px
+}
+
+.meta_critic_score::before {
+  content: url('https://ssl.gstatic.com/ke-tvm/showtimes/metacritic_16_16.png');
+  margin-right: 5px
+}
+
+.movie_description {
+  margin: 20px;
+  line-height: 1.5rem;
+}
+
+.movie_buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+.movie_buttons button {
+  background-color: inherit;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.movie_buttons button:focus {
+  outline: 0;
+}
+
+.movie_buttons button:active {
+  transform: scale(0.95);
+}
+
+.movie_buttons_action {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.movie_buttons_action i {
+  color: #606060;
+  font-size: 1.25rem;
+  margin: 10px 0 0 0;
+}

@@ -1,0 +1,24 @@
+.cast_member {
+  display: flex;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.cast_member img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin: 16px;
+}
+
+.cast_and_character {
+  margin: 10px 0 0 0;
+}
+
+.cast_character_name {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 0.9rem;
+}
+
+.cast_member p {
+  margin: 5px 0;
+}
