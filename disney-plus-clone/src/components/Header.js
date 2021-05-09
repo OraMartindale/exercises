@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -7,8 +8,19 @@ import NavMenu from './NavMenu';
 
 const Header = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const userName = useSelector(selectUserName);
   const userPhoto = useSelector(selectUserPhoto);
+
+  useEffect(
+    () => {
+      auth.onAuthStateChanged(async user => {
+        if (user) {
+          setUser(user);
+          history.push('/home');
+        }
+      })
+    }, [userName]);
 
   const setUser = user => {
     dispatch(
@@ -27,6 +39,7 @@ const Header = () => {
       })
       .catch(console.error);
   }
+
   return (
     <Nav>
       <Logo>
