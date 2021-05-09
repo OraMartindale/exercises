@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { auth, provider } from '../firebase';
-import { selectUserName, selectUserPhoto, setUserLoginDetails } from '../features/user/userSlice';
+import { selectUserName, selectUserPhoto, setSignOutState, setUserLoginDetails } from '../features/user/userSlice';
 import NavMenu from './NavMenu';
 
 const Header = () => {
@@ -40,6 +40,15 @@ const Header = () => {
       .catch(console.error);
   }
 
+  const handleSignOut = () => {
+    auth.signOut()
+      .then(() => {
+        dispatch(setSignOutState());
+        history.push('/');
+      })
+      .catch(console.error);
+  }
+
   return (
     <Nav>
       <Logo>
@@ -49,7 +58,12 @@ const Header = () => {
         userName ?
           <>
             <NavMenu />
-            <UserImg src={userPhoto} alt={userName} />
+            <SignOut>
+              <UserImg src={userPhoto} alt={userName} />
+              <DropDown onClick={handleSignOut}>
+                Sign Out
+              </DropDown>
+            </SignOut>
           </>
           :
           <Login onClick={handleAuth}>login</Login>
@@ -86,8 +100,7 @@ const Logo = styled.a`
 `;
 
 const UserImg = styled.img`
-  height: 80%;
-  border-radius: 50%;
+  height: 100%;
 `;
 
 const Login = styled.a`
@@ -103,6 +116,43 @@ const Login = styled.a`
     color: black;
     background-color: #f9f9f9;
     border-color: transparent;
+  }
+`;
+
+const DropDown = styled.div`
+  position: absolute;
+  top: 48px;
+  right: 0;
+  background: rgb(19, 19, 19);
+  border: 1px solid rgba(151, 151, 151, 0.34);
+  border-radius: 4px;
+  box-shadow: rgb(0 0 0 / 50%) 0 0 18px 0;
+  padding: 10px;
+  font-size: 14px;
+  letter-spacing: 3px;
+  width: 105px;
+`;
+
+const SignOut = styled.div`
+  position: relative;
+  height: 48px;
+  width: 48px;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+
+  ${UserImg} {
+    border-radius: 50%;
+    height: 100%;
+    width: 100%;
+  }
+
+  &:hover {
+    ${DropDown} {
+      opacity: 1;
+      transition-duration: 1s;
+    }
   }
 `;
 
