@@ -131,6 +131,7 @@ const DropDown = styled.div`
   font-size: 14px;
   letter-spacing: 3px;
   width: 105px;
+  opacity: 0;
 `;
 
 const SignOut = styled.div`
