@@ -1,15 +1,18 @@
 import styled from 'styled-components';
 import ImgSlider from './ImgSlider';
-import NewDisney from './NewDisney';
-import Originals from './Originals';
-import Recommends from './Recommends';
-import Trending from './Trending';
 import Viewers from './Viewers';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import db from '../firebase';
-import { setMovies } from '../features/movie/movieSlice';
+import {
+  selectRecommend,
+  selectNewDisney,
+  selectOriginal,
+  selectTrending,
+  setMovies
+} from '../features/movie/movieSlice';
 import { selectUserName } from '../features/user/userSlice';
+import Category from './Category';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -61,10 +64,10 @@ const Home = () => {
     <Container>
       <ImgSlider />
       <Viewers />
-      <Recommends />
-      <NewDisney />
-      <Originals />
-      <Trending />
+      <Category categoryFunc={selectRecommend} title="Recommended for You" />
+      <Category categoryFunc={selectNewDisney} title="New to Disney+" />
+      <Category categoryFunc={selectOriginal} title="Originals" />
+      <Category categoryFunc={selectTrending} title="Trending" />
     </Container>
   );
 };

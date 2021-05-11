@@ -1,25 +1,24 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectTrending } from '../features/movie/movieSlice';
 
-const Trending = () => {
-  const movies = useSelector(selectTrending);
+const Category = ({ categoryFunc, title }) => {
+  const movies = useSelector(categoryFunc);
 
   return (
     <Container>
-      <h4>Trending</h4>
+      <h4>{title}</h4>
 
       <Content>
-        {
-          movies && movies.map(movie => (
-            <Wrap key={movie.id}>
-              <Link to={`/details/${movie.id}`}>
+        {movies &&
+          movies.map((movie, key) => (
+            <Wrap key={key}>
+              {movie.id}
+              <Link to={`/detail/${movie.id}`}>
                 <img src={movie.cardImg} alt={movie.title} />
               </Link>
             </Wrap>
-          ))
-        }
+          ))}
       </Content>
     </Container>
   )
@@ -71,4 +70,4 @@ const Wrap = styled.div`
   }
 `;
 
-export default Trending;
+export default Category;
