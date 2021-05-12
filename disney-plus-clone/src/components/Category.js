@@ -11,9 +11,9 @@ const Category = ({ categoryFunc, title }) => {
 
       <Content>
         {movies &&
-          movies.map((movie, key) => (
-            <Wrap key={key}>
-              {movie.id}
+          movies.map(movie => (
+            <Wrap key={movie.id}>
+              {movie.title}
               <Link to={`/detail/${movie.id}`}>
                 <img src={movie.cardImg} alt={movie.title} />
               </Link>
